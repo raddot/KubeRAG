@@ -1,0 +1,17 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: kuberag-ingress
+  namespace: kuberag
+spec:
+  rules:
+    - host: api.kuberag.yourdomain.com
+  http:
+      paths:
+            - path: /
+      pathType: Prefix
+      backend:
+          service:
+            name: kuberag-api-service
+            port:
+              number: 80

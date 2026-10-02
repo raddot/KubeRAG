@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kuberag-worker
+  namespace: kuberag
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: kuberag-worker
+  template:
+    metadata:
+      labels:
+        app: kuberag-worker
+    spec:
+      containers:
+            - name: worker
+      image: radhika/kuberag-worker:latest
+        envFrom:
+                - configMapRef:
+            name: kuberag-config
+        resources:
+          requests:
+            cpu: "1000m"
+            memory: "2Gi"
